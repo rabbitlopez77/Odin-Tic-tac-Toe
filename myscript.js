@@ -4,8 +4,31 @@ const cellElements = document.querySelectorAll('[data-cell]');
 const gameBoard = document.getElementById('gameBoard');
 const winningMessageElement =document.getElementById('winningMessage')
 const winningTextMessageElement = document.querySelector('[data-winning-message-text]')
+const playersNameDisplay = document.getElementById('playersNameDisplay')
 let circleTurn;
 const restartButton = document.getElementById('restartButton')
+
+let player1;
+let player2;
+
+const  createPlayer = (name, player) => {
+    return {
+      name: name,
+      player: player
+    };
+  };
+const nameingPlayers = () => {
+    let playerX = prompt('Who is Player 1', 'Type here')
+let playerO = prompt('Who is Player 2', 'Type here')
+player1 = createPlayer(playerX, 1)
+player2 = createPlayer(playerO, 2)
+playersNameDisplay.innerText = `${player1.name} is X and ${player2.name} is O`
+}
+
+
+
+
+
 const winningCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -19,6 +42,7 @@ const winningCombos = [
 startGame()
 restartButton.addEventListener('click', startGame)
 function startGame() {
+    nameingPlayers()
     circleTurn = false
     cellElements.forEach(cell => {
         cell.classList.remove(X_CLASS)
@@ -28,6 +52,7 @@ function startGame() {
     })
     setBoardHoverClass()
     winningMessageElement.classList.remove('show')
+    
 }
 
 
@@ -43,8 +68,6 @@ function handleClick(event) {
         swapTurns();
         setBoardHoverClass();
     }
-    //check for win
-    //check for draw
 }
 function isDraw() {
     return [...cellElements].every(cell => {
@@ -54,8 +77,10 @@ function isDraw() {
 function endGame(draw) {
     if(draw) {
         winningTextMessageElement.innerText = 'Draw!'
+        
     }else {
-        winningTextMessageElement.innerText = `${circleTurn ? 'O"s' : 'X"s'} Wins!`
+        winningTextMessageElement.innerText = `${circleTurn ? player2.name : player1.name} Wins!`
+        
     }
     winningMessageElement.classList.add('show')
 }
@@ -82,3 +107,9 @@ function checkWin(currentClass){
         })
     })
 }
+
+
+
+
+
+

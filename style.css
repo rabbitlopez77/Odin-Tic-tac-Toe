@@ -118,11 +118,20 @@ body{
     padding: .25em .5em;
     cursor: pointer;
 }
-#restartButton:hover {
+#restartButton:hover,
+#playAgainButton:hover {
     background-color: black;
     border-color: white;
     color: white;
 }
 #winningMessage.show {
     display: flex;
+}
+
+
+
+
+.playersNameDisplay {
+    text-align: center;
+    font-size: 100px;
 }
