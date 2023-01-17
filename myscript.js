@@ -7,10 +7,9 @@ const winningTextMessageElement = document.querySelector('[data-winning-message-
 const playersNameDisplay = document.getElementById('playersNameDisplay')
 let circleTurn;
 const restartButton = document.getElementById('restartButton')
-
+const playAgainButton = document.getElementById('playAgainButton')
 let player1;
 let player2;
-
 const  createPlayer = (name, player) => {
     return {
       name: name,
@@ -24,11 +23,6 @@ player1 = createPlayer(playerX, 1)
 player2 = createPlayer(playerO, 2)
 playersNameDisplay.innerText = `${player1.name} is X and ${player2.name} is O`
 }
-
-
-
-
-
 const winningCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -54,8 +48,18 @@ function startGame() {
     winningMessageElement.classList.remove('show')
     
 }
-
-
+const playAgain = () => {
+    circleTurn = false
+    cellElements.forEach(cell => {
+        cell.classList.remove(X_CLASS)
+        cell.classList.remove(CIRCLE_CLASS)
+        cell.removeEventListener('click', handleClick)
+        cell.addEventListener('click', handleClick, {once: true})
+    })
+    setBoardHoverClass()
+    winningMessageElement.classList.remove('show')
+}
+playAgainButton.addEventListener('click', playAgain)
 function handleClick(event) {
     const cell = event.target;
     const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS
@@ -107,9 +111,3 @@ function checkWin(currentClass){
         })
     })
 }
-
-
-
-
-
-

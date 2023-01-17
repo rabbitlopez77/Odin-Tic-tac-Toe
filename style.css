@@ -127,10 +127,6 @@ body{
 #winningMessage.show {
     display: flex;
 }
-
-
-
-
 .playersNameDisplay {
     text-align: center;
     font-size: 100px;
