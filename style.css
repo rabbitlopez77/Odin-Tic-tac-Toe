@@ -12,7 +12,7 @@ body{
 
 .gameBoard {
     width: 100vw;
-    height: 100vh;
+    height: 80vh;
     display: grid;
     justify-content: center;
     align-content: center;
@@ -127,7 +127,10 @@ body{
 #winningMessage.show {
     display: flex;
 }
-.playersNameDisplay {
+.playerODisplay,
+.playerXDisplay,
+.vs {
     text-align: center;
     font-size: 100px;
+    margin: 0;
 }

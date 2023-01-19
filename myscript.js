@@ -4,12 +4,15 @@ const cellElements = document.querySelectorAll('[data-cell]');
 const gameBoard = document.getElementById('gameBoard');
 const winningMessageElement =document.getElementById('winningMessage')
 const winningTextMessageElement = document.querySelector('[data-winning-message-text]')
-const playersNameDisplay = document.getElementById('playersNameDisplay')
+const playerXDisplay = document.getElementById('playerXDisplay')
+const playerODisplay = document.getElementById('playerODisplay')
 let circleTurn;
 const restartButton = document.getElementById('restartButton')
 const playAgainButton = document.getElementById('playAgainButton')
 let player1;
 let player2;
+let player1Round = 0;
+let player2Round = 0;
 const  createPlayer = (name, player) => {
     return {
       name: name,
@@ -17,11 +20,12 @@ const  createPlayer = (name, player) => {
     };
   };
 const nameingPlayers = () => {
-    let playerX = prompt('Who is Player 1', 'Type here')
-let playerO = prompt('Who is Player 2', 'Type here')
+    let playerX = prompt('Who is Player X', 'Player X Name')
+let playerO = prompt('Who is Player O', 'Player O Name ')
 player1 = createPlayer(playerX, 1)
 player2 = createPlayer(playerO, 2)
-playersNameDisplay.innerText = `${player1.name} is X and ${player2.name} is O`
+playerXDisplay.innerText = `${player1.name} is X`
+playerODisplay.innerText = ` ${player2.name} is O`
 }
 const winningCombos = [
     [0, 1, 2],
@@ -83,9 +87,17 @@ function endGame(draw) {
         winningTextMessageElement.innerText = 'Draw!'
         
     }else {
+        if(circleTurn){
+            player2Round++
+            console.log(player1Round, player2Round)
+        }else{
+            player1Round++
+            console.log(player1Round, player2Round)
+        }
         winningTextMessageElement.innerText = `${circleTurn ? player2.name : player1.name} Wins!`
         
     }
+
     winningMessageElement.classList.add('show')
 }
 
@@ -105,9 +117,11 @@ function setBoardHoverClass() {
     }
 }
 function checkWin(currentClass){
+    
     return winningCombos.some(combo => {
         return combo.every(index => {
             return cellElements[index].classList.contains(currentClass)
         })
     })
 }
+
