@@ -12,7 +12,7 @@ body{
 
 .gameBoard {
     width: 100vw;
-    height: 80vh;
+    height: 50vh;
     display: grid;
     justify-content: center;
     align-content: center;
@@ -136,4 +136,8 @@ body{
 }
 .roundsDisplay {
     border: 1px solid black;
+    text-align: center;
+    width: fit-content;
+    margin: auto;
+    padding: 10px;
 }

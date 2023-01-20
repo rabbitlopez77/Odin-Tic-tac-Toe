@@ -4,25 +4,25 @@ const cellElements = document.querySelectorAll('[data-cell]');
 const gameBoard = document.getElementById('gameBoard');
 const winningMessageElement =document.getElementById('winningMessage')
 const winningTextMessageElement = document.querySelector('[data-winning-message-text]')
-const playerXDisplay = document.getElementById('playerXDisplay')
-const playerODisplay = document.getElementById('playerODisplay')
 let circleTurn;
 const restartButton = document.getElementById('restartButton')
 const playAgainButton = document.getElementById('playAgainButton')
 let player1;
 let player2;
-const xRoundsDisplay = document.getElementById('xRoundsDisplay');
-const oRoundsDisplay = document.getElementById('oRoundsDisplay');
 const displayRounds = () => {
-    xRoundsDisplay.innerText = `${player1.name} won ${player1.roundWon}`
-    oRoundsDisplay.innerText = `${player2.name} won ${player2.roundWon}`
+    player1.xRoundsDisplay.innerText = `${player1.name} won ${player1.roundWon}`
+    player2.oRoundsDisplay.innerText = `${player2.name} won ${player2.roundWon}`
 }
 
 const  createPlayer = (name, player) => {
     return {
       name: name,
       player: player,
-      roundWon: 0
+      roundWon: 0,
+      xRoundsDisplay: document.getElementById('xRoundsDisplay'),
+      playerXDisplay: document.getElementById('playerXDisplay'),
+      oRoundsDisplay: document.getElementById('oRoundsDisplay'),
+      playerODisplay: document.getElementById('playerODisplay')
     };
   };
 const nameingPlayers = () => {
@@ -30,8 +30,8 @@ const nameingPlayers = () => {
 let playerO = prompt('Who is Player O', 'Player O Name ')
 player1 = createPlayer(playerX, 1)
 player2 = createPlayer(playerO, 2)
-playerXDisplay.innerText = `${player1.name} is X`
-playerODisplay.innerText = ` ${player2.name} is O`
+player1.playerXDisplay.innerText = `${player1.name} is X`
+player2.playerODisplay.innerText = ` ${player2.name} is O`
 }
 const winningCombos = [
     [0, 1, 2],
@@ -133,5 +133,3 @@ function checkWin(currentClass){
         })
     })
 }
-
-
