@@ -97,10 +97,10 @@ function endGame(draw) {
         
     }else {
         if(circleTurn){
-            player2.roundWon += 1
+            player2.roundWon++
             console.log(player1.roundWon, player2.roundWon)
         }else{
-            player1.roundWon += 1
+            player1.roundWon++
             console.log(player1.roundWon, player2.roundWon)
         }
         winningTextMessageElement.innerText = `${circleTurn ? player2.name : player1.name} Wins!`
