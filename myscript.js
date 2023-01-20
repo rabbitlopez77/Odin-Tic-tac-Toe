@@ -13,6 +13,13 @@ let player1;
 let player2;
 let player1Round = 0;
 let player2Round = 0;
+const xRoundsDisplay = document.getElementById('xRoundsDisplay');
+const oRoundsDisplay = document.getElementById('oRoundsDisplay');
+const displayRounds = () => {
+    xRoundsDisplay.innerText = `${player1.name} won ${player1Round}`
+    oRoundsDisplay.innerText = `${player2.name} won ${player2Round}`
+}
+
 const  createPlayer = (name, player) => {
     return {
       name: name,
@@ -49,7 +56,11 @@ function startGame() {
         cell.addEventListener('click', handleClick, {once: true})
     })
     setBoardHoverClass()
+    player1Round = 0;
+    player2Round = 0;
+    
     winningMessageElement.classList.remove('show')
+    displayRounds()
     
 }
 const playAgain = () => {
@@ -61,7 +72,9 @@ const playAgain = () => {
         cell.addEventListener('click', handleClick, {once: true})
     })
     setBoardHoverClass()
+    
     winningMessageElement.classList.remove('show')
+    displayRounds()
 }
 playAgainButton.addEventListener('click', playAgain)
 function handleClick(event) {
@@ -124,4 +137,5 @@ function checkWin(currentClass){
         })
     })
 }
+
 
