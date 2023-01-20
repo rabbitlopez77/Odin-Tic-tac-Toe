@@ -11,19 +11,18 @@ const restartButton = document.getElementById('restartButton')
 const playAgainButton = document.getElementById('playAgainButton')
 let player1;
 let player2;
-let player1Round = 0;
-let player2Round = 0;
 const xRoundsDisplay = document.getElementById('xRoundsDisplay');
 const oRoundsDisplay = document.getElementById('oRoundsDisplay');
 const displayRounds = () => {
-    xRoundsDisplay.innerText = `${player1.name} won ${player1Round}`
-    oRoundsDisplay.innerText = `${player2.name} won ${player2Round}`
+    xRoundsDisplay.innerText = `${player1.name} won ${player1.roundWon}`
+    oRoundsDisplay.innerText = `${player2.name} won ${player2.roundWon}`
 }
 
 const  createPlayer = (name, player) => {
     return {
       name: name,
-      player: player
+      player: player,
+      roundWon: 0
     };
   };
 const nameingPlayers = () => {
@@ -56,9 +55,6 @@ function startGame() {
         cell.addEventListener('click', handleClick, {once: true})
     })
     setBoardHoverClass()
-    player1Round = 0;
-    player2Round = 0;
-    
     winningMessageElement.classList.remove('show')
     displayRounds()
     
@@ -101,11 +97,11 @@ function endGame(draw) {
         
     }else {
         if(circleTurn){
-            player2Round++
-            console.log(player1Round, player2Round)
+            player2.roundWon += 1
+            console.log(player1.roundWon, player2.roundWon)
         }else{
-            player1Round++
-            console.log(player1Round, player2Round)
+            player1.roundWon += 1
+            console.log(player1.roundWon, player2.roundWon)
         }
         winningTextMessageElement.innerText = `${circleTurn ? player2.name : player1.name} Wins!`
         
